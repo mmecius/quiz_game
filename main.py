@@ -1,16 +1,20 @@
-# This is a sample Python script.
-
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+from question_model import Question
+from data import question_data
+from quiz_brain import QuizBrain
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+question_bank = []
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+for question in question_data:
+    question_text = question["text"]
+    question_answer = question["answer"]
+    new_question = Question(text=question_text,answer=question_answer)
+    question_bank.append(new_question)
+
+
+
+quiz = QuizBrain(question_bank)
+
+
+while quiz.still_has_questions():
+    quiz.next_question()
